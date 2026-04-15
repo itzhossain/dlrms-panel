@@ -2,56 +2,100 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Search</title>
+<title>DLRMS Order Search</title>
 
 <style>
 body {
-  font-family: Arial;
-  background:#0f172a;
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#0f172a,#1e293b);
   color:white;
-  padding:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.container {
+  width:100%;
+  max-width:400px;
+  background:#1e293b;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
   text-align:center;
 }
-.box {
-  background:#1e293b;
-  padding:20px;
-  border-radius:12px;
+
+h2 {
+  margin-bottom:10px;
 }
+
+p {
+  font-size:14px;
+  color:#94a3b8;
+}
+
 input {
   width:100%;
   padding:14px;
-  margin-top:10px;
-  border-radius:8px;
   border:none;
+  border-radius:10px;
+  margin-top:15px;
   font-size:16px;
+}
+
+button {
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  margin-top:10px;
+  background:#38bdf8;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover {
+  background:#0ea5e9;
+}
+
+#msg {
+  margin-top:10px;
+  font-size:14px;
+  color:#38bdf8;
 }
 </style>
 
 </head>
 <body>
 
-<h2>📄 DLRMS Order Search</h2>
+<div class="container">
 
-<div class="box">
-  <input id="id" placeholder="Enter Order Number" oninput="go()">
+  <h2>📄 DLRMS Search</h2>
+  <p>Enter Order Number to view details</p>
+
+  <input id="id" placeholder="Enter Order Number">
+  <button onclick="go()">Search</button>
+
+  <p id="msg"></p>
+
 </div>
 
 <script>
-let timeout;
-
 function go(){
- clearTimeout(timeout);
-
  let id = document.getElementById('id').value;
 
- if(id.length < 5) return;
+ if(!id){
+   alert("Order number likho");
+   return;
+ }
 
- timeout = setTimeout(()=>{
-  window.open(
-   "https://citizen.dlrms.land.gov.bd/?ORDER_ID_FOR_DETAILS=" + id,
-   "_blank"
-  );
- }, 800);
+ document.getElementById('msg').innerText = "Opening...";
+
+ setTimeout(()=>{
+   window.location.href =
+   "https://citizen.dlrms.land.gov.bd/?ORDER_ID_FOR_DETAILS=" + id;
+ }, 500);
 }
 </script>
 
