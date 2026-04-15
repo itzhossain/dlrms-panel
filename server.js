@@ -3,28 +3,21 @@ const axios = require("axios");
 
 const app = express();
 
-const config = {
-  auth_token: process.env.AUTH_TOKEN,
-  user_token: process.env.USER_TOKEN,
-  cookie: process.env.COOKIE
-};
-
-app.get("/api/details/:id", async (req, res) => {
+app.get("/api/khotiyan/:id", async (req, res) => {
   try {
-    const r = await axios.get(
-      `https://gateway.dlrms.land.gov.bd/core-api/api/citizens/orders/${req.params.id}`,
+    const id = req.params.id;
+
+    const response = await axios.get(
+      "https://bcl-verify.live/khotiyan/khotiyan_view.php",
       {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + config.auth_token,
-          "user-token": "Bearer " + config.user_token,
-          cookie: config.cookie
-        }
+        params: { khotiyan_no: id },
+        headers: { "user-agent": "Mozilla/5.0" }
       }
     );
-    res.json(r.data);
+
+    res.send(response.data);
   } catch {
-    res.json({ error: "failed" });
+    res.send("Error fetching data");
   }
 });
 
