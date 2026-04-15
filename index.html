@@ -3,22 +3,55 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order Search</title>
-</head>
 
+<style>
+body {
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+.box {
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+}
+input, button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:none;
+}
+button {
+  background:#38bdf8;
+  font-weight:bold;
+}
+</style>
+
+</head>
 <body>
 
-<h2>Order Search</h2>
+<h2>📄 DLRMS Order Search</h2>
 
-<input id="id" placeholder="Enter Order Number">
-<button onclick="go()">Search</button>
+<div class="box">
+  <input id="id" placeholder="Enter Order Number">
+  <button onclick="go()">Search</button>
+</div>
 
 <script>
 function go(){
- let id=document.getElementById('id').value;
+ let id = document.getElementById('id').value;
+
+ if(!id){
+   alert("Order number likho");
+   return;
+ }
 
  window.open(
-  "https://citizen.dlrms.land.gov.bd/?ORDER_ID_FOR_DETAILS=" + id,
-  "_blank"
+   "https://citizen.dlrms.land.gov.bd/?ORDER_ID_FOR_DETAILS=" + id,
+   "_blank"
  );
 }
 </script>
