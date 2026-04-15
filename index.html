@@ -17,16 +17,13 @@ body {
   padding:20px;
   border-radius:12px;
 }
-input, button {
+input {
   width:100%;
-  padding:12px;
+  padding:14px;
   margin-top:10px;
   border-radius:8px;
   border:none;
-}
-button {
-  background:#38bdf8;
-  font-weight:bold;
+  font-size:16px;
 }
 </style>
 
@@ -36,23 +33,25 @@ button {
 <h2>📄 DLRMS Order Search</h2>
 
 <div class="box">
-  <input id="id" placeholder="Enter Order Number">
-  <button onclick="go()">Search</button>
+  <input id="id" placeholder="Enter Order Number" oninput="go()">
 </div>
 
 <script>
+let timeout;
+
 function go(){
+ clearTimeout(timeout);
+
  let id = document.getElementById('id').value;
 
- if(!id){
-   alert("Order number likho");
-   return;
- }
+ if(id.length < 5) return;
 
- window.open(
+ timeout = setTimeout(()=>{
+  window.open(
    "https://citizen.dlrms.land.gov.bd/?ORDER_ID_FOR_DETAILS=" + id,
    "_blank"
- );
+  );
+ }, 800);
 }
 </script>
 
