@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h3>DLRMS Panel</h3>
+
+<input id="id" placeholder="Order ID">
+<button onclick="go()">Get</button>
+
+<pre id="out"></pre>
+
+<script>
+function go(){
+ let id=document.getElementById('id').value;
+ fetch('/api/details/'+id)
+ .then(r=>r.json())
+ .then(d=>{
+  document.getElementById('out').innerText=JSON.stringify(d,null,2);
+ });
+}
+</script>
+
+</body>
+</html>
